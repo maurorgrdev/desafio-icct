@@ -1,5 +1,10 @@
+# config.py
+
+import os
+
 class Config:
     DEBUG = False
+    # Use os.getenv para acessar as variáveis de ambiente do .env
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:postgres@teste-icct-db-1/icct'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # Outras configurações relevantes aqui
@@ -12,5 +17,3 @@ class DevelopmentConfig(Config):
 class ProductionConfig(Config):
     # Configurações específicas de produção aqui
     pass
-
-# Adicione outras classes de configuração conforme necessário, como para ambientes de teste, etc.

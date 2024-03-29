@@ -2,7 +2,7 @@ from flask import Flask
 from app.config.config import Config
 from app.config.database import db
 from flask_migrate import Migrate
-from flask_restx import Api
+from flask_restx import Api, Resource  # Adicionei a importação de Resource
 
 def create_app():
     app = Flask(__name__)
@@ -17,6 +17,9 @@ def create_app():
     api = Api(app, version='1.0', title='Minha API Escola',
               description='API para gerenciar informações escolares')
 
-    # Registre os blueprints
+    # Definindo uma namespace para a API
+    # namespace = api.namespace('hello', description='Hello World operations')
+
+
 
     return app
