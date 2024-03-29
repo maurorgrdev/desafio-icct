@@ -1,3 +1,5 @@
+# app/schemas/user_schema.py
+
 from marshmallow import Schema, fields, validates, ValidationError
 import re
 
@@ -10,7 +12,9 @@ class UserSchema(Schema):
     login = fields.String(required=True)
     senha = fields.String(required=True)
 
-    @validates('nome', 'sobrenome', 'login')
+    @validates('nome')
+    @validates('sobrenome')
+    @validates('login')
     def validate_only_letters(self, value):
         if not value.isalpha():
             raise ValidationError("Este campo deve conter apenas letras.")

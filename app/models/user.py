@@ -1,3 +1,5 @@
+# app/models/user.py
+
 from app.config.database import db
 from app.config.database import Base
 
