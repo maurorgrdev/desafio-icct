@@ -7,6 +7,7 @@ from app.config.database import db
 from flask_migrate import Migrate
 from .routes import register_routes
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 
 def create_app():
     app = Flask(__name__)
@@ -21,11 +22,15 @@ def create_app():
     # Inicialize o JWT
     jwt = JWTManager(app)
 
+    {"origins": "*", }
+    # Configuração do CORS
+    cors = CORS(app, resources={r"/api/*": {"origins": "*", "methods": ["GET", "POST", "PUT", "DELETE"], "headers": ["Content-Type", "Authorization"]}})
+
     # Para registrar as migrações
     migrate = Migrate(app, db) 
 
     # Configuração do Flask-RESTX
-    api_bp = Blueprint('api', __name__)
+    api_bp = Blueprint('api', __name__, url_prefix='/api')
     api = Api(api_bp, version='1.0', title='Minha API Escola',
               description='API para gerenciar informações escolares')
     app.register_blueprint(api_bp)

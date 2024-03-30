@@ -7,7 +7,7 @@ from app.controllers import UserController, UserDetailController
 def create_user_api(api):
     user_bp = Blueprint('user_bp', __name__)
     
-    user_ns = api.namespace(name='user', description='Operações relacionadas a usuário')
+    user_ns = api.namespace(name='users', description='Operações relacionadas a usuário')
     user_model = api.model('User', {
         'nome': fields.String(required=True, description='Nome do usuário'),
         'sobrenome': fields.String(required=True, description='Sobrenome do usuário'),

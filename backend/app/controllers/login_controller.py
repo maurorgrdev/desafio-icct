@@ -3,12 +3,13 @@ from flask_restx import Resource, Namespace, Api
 from app.models.user import User
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from app.schemas import LoginSchema
+from app.schemas import LoginSchema, UserSchema
 from app.services import AuthService
 
 api = Api()
 
 login_schema = LoginSchema()
+user_schema = UserSchema()
 
 user_model = api.model('User', {
     'login': {'type': 'string', 'required': True, 'description': 'Login do usuário'},
@@ -30,5 +31,7 @@ class LoginController(Resource):
         # Gerar o token de acesso usando o serviço de autenticação
         access_token = AuthService.generate_access_token(user.id)
 
+        user_materialized = user_schema.dump(user)
+
         # Retornar o token JWT como resposta
-        return jsonify({'access_token': access_token, 'status': 200})
+        return jsonify({'access_token': access_token, 'user': user_materialized, 'status': 200})

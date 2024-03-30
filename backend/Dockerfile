@@ -9,8 +9,8 @@ ENV PYTHONUNBUFFERED 1
 # Atualize o gerenciador de pacotes do sistema
 RUN apt-get update
 
-# Crie e defina o diretório de trabalho
-WORKDIR /app
+# Defina o diretório de trabalho
+WORKDIR /backend
 
 # Copie o arquivo de requisitos e instale as dependências do Python
 COPY requirements.txt .
@@ -18,7 +18,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copie o código do aplicativo para o contêiner
-COPY . /app/
+COPY . /backend/
 
 # Execute o aplicativo Flask
 CMD ["python", "run.py"]
