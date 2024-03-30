@@ -1,14 +1,11 @@
 # app/app.py
 
 from flask import Flask, Blueprint
-from flask_restx import Namespace
+from flask_restx import Api
 from app.config.config import Config
 from app.config.database import db
 from flask_migrate import Migrate
-from flask_restx import Api, Resource  # Adicionei a importação de Resource
 from .routes import register_routes
-from app.controllers import UserController, UserDetailController
-from app.namespaces import register_namespaces
 
 def create_app():
     app = Flask(__name__)
@@ -23,15 +20,12 @@ def create_app():
     migrate = Migrate(app, db) 
 
     # Configuração do Flask-RESTX
-    blueprint = Blueprint('api', __name__, url_prefix='/api')
-    api = Api(blueprint, version='1.0', title='Minha API Escola',
+    api_bp = Blueprint('api', __name__)
+    api = Api(api_bp, version='1.0', title='Minha API Escola',
               description='API para gerenciar informações escolares')
-    app.register_blueprint(blueprint)
+    app.register_blueprint(api_bp)
 
-    # Registrando os namespaces
-    register_namespaces(api)
-
-    # Registrando os blueprints
-    register_routes(app)
+    # Registrar os blueprints e as rotas
+    register_routes(app, api)
 
     return app

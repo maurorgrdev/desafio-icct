@@ -1,15 +1,14 @@
 # app/namespaces/user_namespace.py
 
-from flask_restx import Namespace, fields
+# app/namespaces/user_namespace.py
 
-# Crie o namespace
-user_ns = Namespace('User', description='Operações relacionadas a usuário')
+# from flask_restx import Namespace, fields
 
-# Defina o modelo para o namespace
-user_model = user_ns.model('User', {
-    'id': fields.Integer(readOnly=True, description='Identificador único do Usuário'),
-    # Defina outros campos da User aqui
-})
+# user_ns = Namespace(name='User', description='Operações relacionadas a usuário')
 
-# Defina o esquema para serializar/desserializar objetos User
-# user_schema = UserSchema()
+# # Definição do modelo
+# user_model = user_ns.model('User', {
+#     'name': fields.String(required=True, description='Nome do usuário'),
+#     'email': fields.String(required=True, description='Endereço de e-mail do usuário')
+# })
+

@@ -2,66 +2,76 @@ from app.config.database import db
 from app.models import User
 from app.schemas import UserSchema
 from marshmallow import ValidationError
+from flask import jsonify
 
-user_schema = UserSchema()
-
-class UserService:
-    @staticmethod
-    def create(data):
+def handle_database_errors(func):
+    def wrapper(*args, **kwargs):
         try:
-            novo_usuario = user_schema.load(data)
-            db.session.add(novo_usuario)
-            db.session.commit()
-            return user_schema.dump(novo_usuario), 201
+            return func(*args, **kwargs)
         except ValidationError as e:
             db.session.rollback()
-            return {'message': 'Erro ao criar usuário', 'errors': e.messages}, 400
+            return {'message': 'Erro de validação', 'errors': e.messages}, 400
         except Exception as e:
             db.session.rollback()
-            return {'message': 'Erro ao criar usuário', 'error': str(e)}, 500
+            return {'message': 'Erro interno do servidor', 'error': str(e)}, 500
+    return wrapper
 
-    @staticmethod
-    def find_by_id(user_id):
-        user = User.query.get(user_id)
+class UserService:
+    def __init__(self):
+        self.user_schema = UserSchema()
+        self.users_schema = UserSchema(many=True)
+
+    @handle_database_errors
+    def create(self, data):
+        novo_usuario_data = self.user_schema.load(data)
+        novo_usuario = User(**novo_usuario_data)
+        db.session.add(novo_usuario)
+        db.session.commit()
+        return self.user_schema.dump(novo_usuario), 201
+
+    @handle_database_errors
+    def find_by_id(self, id):
+        user = User.query.get(id)
         if user:
-            return user_schema.dump(user)
+            return self.user_schema.dump(user), 200
         else:
             return {'message': 'Usuário não encontrado'}, 404
 
-    @staticmethod
-    def find_all():
+    @handle_database_errors
+    def find_all(self):
         users = User.query.all()
-        return user_schema.dump(users)
+        return self.users_schema.dump(users, many=True), 200
 
-    @staticmethod
-    def update(user_id, data):
-        try:
-            usuario_atualizado = User.query.get(user_id)
-            if usuario_atualizado:
-                user_data = user_schema.load(data)
-                for key, value in user_data.items():
-                    setattr(usuario_atualizado, key, value)
-                db.session.commit()
-                return user_schema.dump(usuario_atualizado)
-            else:
-                return {'message': 'Usuário não encontrado'}, 404
-        except ValidationError as e:
-            db.session.rollback()
-            return {'message': 'Erro ao atualizar usuário', 'errors': e.messages}, 400
-        except Exception as e:
-            db.session.rollback()
-            return {'message': 'Erro ao atualizar usuário', 'error': str(e)}, 500
 
-    @staticmethod
-    def delete(user_id):
+    @handle_database_errors
+    def update(self, id, data):
         try:
-            usuario = User.query.get(user_id)
-            if usuario:
-                db.session.delete(usuario)
-                db.session.commit()
-                return {'message': 'Usuário deletado com sucesso'}
-            else:
+            # Buscar o usuário pelo ID
+            user = User.query.get(id)
+            if not user:
                 return {'message': 'Usuário não encontrado'}, 404
+
+            # Atualizar os campos do usuário com os novos dados
+            for key, value in data.items():
+                setattr(user, key, value)
+
+            # Salvar as alterações no banco de dados
+            db.session.commit()
+
+            # Serializar o usuário atualizado
+            user_serialized = self.user_schema.dump(user)
+
+            # Retornar os dados do usuário atualizado
+            return  user_serialized, 200
         except Exception as e:
-            db.session.rollback()
-            return {'message': 'Erro ao deletar usuário', 'error': str(e)}, 500
+            # Em caso de erro, retornar uma resposta de erro interno do servidor
+            return {'message': 'Erro interno do servidor', 'error': str(e)}, 500
+
+    @handle_database_errors
+    def delete(self, id):
+        usuario = User.query.get(id)
+        if not usuario:
+            return {'message': 'Usuário não encontrado'}, 404
+        db.session.delete(usuario)
+        db.session.commit()
+        return {'message': 'Usuário deletado com sucesso'}
