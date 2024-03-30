@@ -1,4 +1,4 @@
-# Dockerfile
+# Dockerfile para o backend
 
 # Use a imagem base do Python
 FROM python:3.12.2
@@ -13,12 +13,12 @@ RUN apt-get update
 WORKDIR /app
 
 # Copie o arquivo de requisitos e instale as dependências do Python
-COPY requirements.txt /app/
+COPY requirements.txt .
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copie o código do aplicativo para o contêiner
 COPY . /app/
-
 
 # Execute o aplicativo Flask
 CMD ["python", "run.py"]

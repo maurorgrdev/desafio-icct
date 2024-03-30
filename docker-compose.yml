@@ -1,5 +1,3 @@
-# docker-compose.yml
-
 version: '3.8'
 
 services:
@@ -9,11 +7,19 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: icct
-  web:
-    build: .
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "5001:5001"  # Mapeia a porta 5001 do contêiner para a porta 5001 no host
-    volumes:
-      - .:/app
     depends_on:
       - db
+
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8080:8080"  # Mapeia a porta 8080 do contêiner para a porta 8080 no host
