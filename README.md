@@ -41,7 +41,7 @@ Instruções para ter uma cópia do repositório.
 O repositório onde se encontra o código fonte da aplicação está na branch **master**. Logo:
 
 ```bash
-$ https://github.com/maurorgrdev/desafio-icct.git
+$ git clone https://github.com/maurorgrdev/desafio-icct.git
 $ cd desafio-icct
 $ git checkout master
 ```
@@ -58,7 +58,7 @@ Isso iniciará os contêineres Docker para o backend, frontend e banco de dados 
 
 ### Acesso
 
-Depois de iniciar os contêineres, você poderá acessar a aplicação através do navegador da web em `http://localhost:8080` para o frontend e `http://localhost:5001` para o backend.
+Depois de iniciar os contêineres, você poderá acessar a aplicação através do navegador da web em `http://localhost:9000` para o frontend e `http://localhost:5001` para o backend.
 
 ### Parar e Remover
 
