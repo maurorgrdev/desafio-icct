@@ -24,15 +24,13 @@ Projeto desenvolvido para o desafio icct, consiste em desenvolver e implementar 
 - Documente a API;
 - Os campos são nome, sobrenome, cpf, email, login e senha.
 
-- 
-- ## 🏁 Getting Started <a name = "getting_started"></a>
+  
+## 🏁 Getting Started <a name = "getting_started"></a>
 Instruções para ter uma cópia do repositório.
 
 ### Pré-requisitos
 
--   **Python - Supported Versions:** >= 3.10
--   **Database:** MySQL
--   **Run-time environment:**: Flask, npm & Quasar Framework
+-   **Run-time environment:** Docker
 
 ### Instalação
 
@@ -60,6 +58,13 @@ Isso iniciará os contêineres Docker para o backend, frontend e banco de dados 
 
 Depois de iniciar os contêineres, você poderá acessar a aplicação através do navegador da web em `http://localhost:9000` para o frontend e `http://localhost:5001` para o backend.
 
+Rotas disponveis:
+- http://localhost:9000/#/login
+- http://localhost:9000/#/users
+- http://localhost:9000/#/users/profile/:id
+- http://localhost:9000/#/users/edit/:id
+- http://localhost:9000/#/users/create
+
 ### Parar e Remover
 
 Para parar e remover os contêineres Docker, você pode usar o seguinte comando:
@@ -67,7 +72,3 @@ Para parar e remover os contêineres Docker, você pode usar o seguinte comando:
 ```bash
 $ docker-compose down
 ```
-
-
-
-
