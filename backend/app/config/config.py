@@ -6,7 +6,7 @@ from app.models import User
 class Config:
     DEBUG = False
     # Use os.getenv para acessar as variáveis de ambiente do .env
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:postgres@teste-icct-db-1/icct'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:postgres@desafio-icct-db-1/icct'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Configuração para Flask-JWT
