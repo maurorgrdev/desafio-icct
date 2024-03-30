@@ -10,7 +10,7 @@ class UserSchema(Schema):
     cpf = fields.String(required=True)
     email = fields.Email(required=True)
     login = fields.String(required=True)
-    senha = fields.String(required=True)
+    senha_hash = fields.String()
 
     # @validates('nome')
     # @validates('sobrenome')

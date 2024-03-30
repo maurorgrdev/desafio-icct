@@ -2,10 +2,11 @@
 
 from flask import Flask, Blueprint
 from flask_restx import Api
-from app.config.config import Config
+from app.config.config import Config, authenticate, identity
 from app.config.database import db
 from flask_migrate import Migrate
 from .routes import register_routes
+from flask_jwt_extended import JWTManager
 
 def create_app():
     app = Flask(__name__)
@@ -14,7 +15,11 @@ def create_app():
     # Inicialização do banco de dados
     with app.app_context():
         db.init_app(app)
+        # db.drop_all()
         db.create_all()
+
+    # Inicialize o JWT
+    jwt = JWTManager(app)
 
     # Para registrar as migrações
     migrate = Migrate(app, db) 

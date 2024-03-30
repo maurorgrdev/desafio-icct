@@ -1,13 +1,28 @@
 # app/config/config.py
 
 import os
+from app.models import User
 
 class Config:
     DEBUG = False
     # Use os.getenv para acessar as variáveis de ambiente do .env
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:postgres@teste-icct-db-1/icct'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    # Outras configurações relevantes aqui
+
+    # Configuração para Flask-JWT
+    SECRET_KEY = 'ZJMRzSf3J76J2yiF7znt6n8Xc66ItMOt4DcVaUXoyfw'
+    JWT_SECRET_KEY = '2pYWDgRjgVAr22fKjv-VWNovuV0_0T9p5e4F2s1Cdk0'
+    JWT_BLACKLIST_ENABLED = True
+    JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
+
+def authenticate(username, password):
+    # Lógica de autenticação
+    pass
+
+def identity(payload):
+    user_id = payload['identity']
+    # Consulta o banco de dados para encontrar o usuário pelo ID
+    return User.query.get(user_id)
 
 class DevelopmentConfig(Config):
     DEBUG = True

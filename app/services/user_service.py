@@ -23,10 +23,22 @@ class UserService:
 
     @handle_database_errors
     def create(self, data):
+        # Desserializar os dados usando o schema do usuário
+        senha = data.pop('senha', None)
+
+        # Desserialize os dados usando o schema do usuário
         novo_usuario_data = self.user_schema.load(data)
+        
+        # Criar uma nova instância de User com os dados do esquema
         novo_usuario = User(**novo_usuario_data)
+
+        # Configurar a senha usando o método set_password
+        novo_usuario.set_password(senha)
+
+        # Adicionar o novo usuário ao banco de dados
         db.session.add(novo_usuario)
         db.session.commit()
+
         return self.user_schema.dump(novo_usuario), 201
 
     @handle_database_errors
