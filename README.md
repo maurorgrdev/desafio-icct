@@ -17,7 +17,7 @@
 
 ## 🧐 Sobre <a name = "about"></a>
 
-Projeto desenvolvido para o desafio icct, consiste em desenvolver e implementar a feature de Cadastro de Usuários, software Web, com acesso a consulta de CEP de uma API externa. O sistema contará com as seguintes camada: Interface (front-end), Regras de negócio (back-end) e Banco de Dados.
+Projeto desenvolvido para o desafio icct, consiste em desenvolver e implementar a feature de Cadastro de Usuários. O sistema contará com as seguintes camada: Interface (front-end), Regras de negócio (back-end) e Banco de Dados (Postgresql).
 
 - Use validação nos campos;
 - Salve em um banco de dados relacional (Preferência Postgresql);
