@@ -2,7 +2,7 @@
 
 from flask import Flask, Blueprint
 from flask_restx import Api
-from app.config.config import Config, authenticate, identity
+from app.config.config import Config
 from app.config.database import db
 from flask_migrate import Migrate
 from .routes import register_routes
