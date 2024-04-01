@@ -12,8 +12,8 @@ load_dotenv()
 
 # Parse dos argumentos de linha de comando
 parser = argparse.ArgumentParser(description='Run the Flask application.')
-parser.add_argument('--host', default='0.0.0.0', help='Host address to run the application on')
-parser.add_argument('--port', type=int, default=5001, help='Port number to run the application on')
+parser.add_argument('--host', default=os.getenv('FLASK_RUN_HOST'), help='Host address to run the application on')
+parser.add_argument('--port', type=int, default=os.getenv('FLASK_RUN_PORT'), help='Port number to run the application on')
 args = parser.parse_args()
 
 # Crie o aplicativo Flask
@@ -37,4 +37,4 @@ if app is None:
 # Execute o aplicativo Flask no host e porta especificados
 if __name__ == "__main__":
     # Use os.getenv para acessar as variáveis de ambiente do .env
-    app.run(host=os.getenv('FLASK_RUN_HOST', '0.0.0.0'), port=os.getenv('FLASK_RUN_PORT', 5001), debug=True)
+    app.run(host=os.getenv('FLASK_RUN_HOST'), port=os.getenv('FLASK_RUN_PORT'), debug=True)
