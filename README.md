@@ -17,7 +17,7 @@
 
 ## 🧐 Sobre <a name = "about"></a>
 
-Projeto desenvolvido para o desafio icct, consiste em desenvolver e implementar a feature de Cadastro de Usuários. O sistema contará com as seguintes camada: Interface (front-end), Regras de negócio (back-end) e Banco de Dados (Postgresql).
+A branch que condiz com a solução para o desafio proposto, entregue no dia e horário limite é a master. Para visualizar melhorias pessoais após a entrega do desafio, visualize a branch development. Projeto desenvolvido para o desafio icct, consiste em desenvolver e implementar a feature de Cadastro de Usuários. O sistema contará com as seguintes camada: Interface (front-end), Regras de negócio (back-end) e Banco de Dados (Postgresql).
 
 - Use validação nos campos;
 - Salve em um banco de dados relacional (Preferência Postgresql);
