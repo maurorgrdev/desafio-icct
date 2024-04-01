@@ -71,35 +71,14 @@
                         ]"
                     />
                   </div>
-                  <div class="q-pa-xs col-4">
-                    <q-input
-                        outlined
-                        dense
-                        v-model="dadosUsuario.senha"
-                        label="Senha de acesso*"
-                        :rules="[
-                            val => val && val.length > 0 ||
-                            'Obrigatório'
-                        ]"
-                        :type="isPwdPrincipal ? 'senha' : 'text'"
-                    >
-                        <template v-slot:append>
-                            <q-icon
-                            :name="isPwdPrincipal ? 'visibility_off' : 'visibility'"
-                            class="cursor-pointer"
-                            @click="isPwdPrincipal = !isPwdPrincipal"
-                            />
-                        </template>
-                    </q-input>
-                </div>
               </div>
           </q-form>
       </q-card-section>
 
-      <q-card-actions class="row text-blue-5" style="padding-left: 25px; padding-right: 25px;">
+      <q-card-actions class="row text-blue-8" style="padding-left: 25px; padding-right: 25px;">
           <q-space />
           <q-btn @click="clickCancel" outline style=" width: 150px;" label="Cancelar" />
-          <q-btn @click="clickSubmit" style=" width: 150px;" color="blue-5" label="Salvar" />
+          <q-btn @click="clickSubmit" style=" width: 150px;" color="blue-8" label="Salvar" />
         </q-card-actions>
   </q-page>
 </template>
@@ -183,11 +162,6 @@ export default {
 
           if((this.dadosUsuario.email === '') || this.dadosUsuario.email === null || this.dadosUsuario.email.length <= 0){
               this.messageError = 'Informe um e-mail válido';
-              return false;
-          }
-
-          if((this.dadosUsuario.senha === '') || this.dadosUsuario.senha === null || this.dadosUsuario.senha.length <= 0 ){
-              this.messageError = 'Informe uma senha';
               return false;
           }
 

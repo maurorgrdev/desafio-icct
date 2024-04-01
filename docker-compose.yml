@@ -17,9 +17,9 @@ services:
     depends_on:
       - db
 
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "9000:9000"  # Mapeia a porta 8080 do contêiner para a porta 8080 no host
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "9000:9000"  # Mapeia a porta 8080 do contêiner para a porta 8080 no host

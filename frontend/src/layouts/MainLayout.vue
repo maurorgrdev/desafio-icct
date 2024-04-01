@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="bg-blue-9">
+    <q-header elevated class="bg-green-10 text-white">
       <q-toolbar>
         <q-btn
           flat
@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          ICCT App xx
+          ICCT - Desafio Técnico
         </q-toolbar-title>
 
         <div>V {{ $q.version }}</div>
@@ -29,12 +29,14 @@
           header
         >
           <div class="row justify-center">
-            <q-avatar size="80px" font-size="52px" color="blue-5" text-color="white" icon="account_circle" />
+            <q-avatar size="80px" font-size="52px" color="blue-5" text-color="white">
+              <img src="../assets/icct_logo.jpeg" alt="ICCT Logo" style="width: 100%; height: auto;">
+            </q-avatar>
           </div>
         </q-item-label>
         <q-item clickable @click="$router.replace('/users')">
           <q-item-section avatar>
-            <q-avatar icon="groups" color="primary" text-color="white" />
+            <q-avatar icon="groups" color="green-10" text-color="white" />
           </q-item-section>
           <q-item-section>
             <q-item-label > <span class="text-weight-bold"> Usuarios </span></q-item-label>
