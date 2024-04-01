@@ -1,6 +1,6 @@
 from app.config.database import db
 from app.models import User
-from app.schemas import UserSchema
+from app.schemas import UserSchema, UserViewSchema
 from marshmallow import ValidationError
 from flask import jsonify
 
@@ -19,6 +19,7 @@ def handle_database_errors(func):
 class UserService:
     def __init__(self):
         self.user_schema = UserSchema()
+        self.user_view_schema = UserViewSchema()
         self.users_schema = UserSchema(many=True)
 
     @handle_database_errors
@@ -39,13 +40,13 @@ class UserService:
         db.session.add(novo_usuario)
         db.session.commit()
 
-        return self.user_schema.dump(novo_usuario), 201
+        return self.user_view_schema.dump(novo_usuario), 201
 
     @handle_database_errors
     def find_by_id(self, id):
         user = User.query.get(id)
         if user:
-            return self.user_schema.dump(user), 200
+            return self.user_view_schema.dump(user), 200
         else:
             return {'message': 'Usuário não encontrado'}, 404
 
@@ -71,7 +72,7 @@ class UserService:
             db.session.commit()
 
             # Serializar o usuário atualizado
-            user_serialized = self.user_schema.dump(user)
+            user_serialized = self.user_view_schema.dump(user)
 
             # Retornar os dados do usuário atualizado
             return  user_serialized, 200

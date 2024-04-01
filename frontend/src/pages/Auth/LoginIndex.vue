@@ -10,8 +10,8 @@
 
                               <q-input outlined v-model="password" label="Sua senha *" hint="senha" />
 
-                              <div class="row text-blue-8">
-                                  <q-btn outline style=" width: 100px; color: blue-8;" label="Limpar" type="reset" class="q-ml-sm" />
+                              <div class="row text-blue-10">
+                                  <q-btn outline style=" width: 100px; color: blue-10;" label="Limpar" type="reset" class="q-ml-sm" />
                                   <q-space />
                                   <q-btn label="Entrar" style=" width: 100px;" type="submit" color="primary"/>
                               </div>

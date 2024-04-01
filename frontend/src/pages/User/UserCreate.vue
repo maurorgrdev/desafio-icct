@@ -96,10 +96,10 @@
           </q-form>
       </q-card-section>
 
-      <q-card-actions class="row text-blue-8" style="padding-left: 25px; padding-right: 25px;">
+      <q-card-actions class="row text-blue-10" style="padding-left: 25px; padding-right: 25px;">
           <q-space />
           <q-btn @click="clickCancel" outline style=" width: 150px;" label="Cancelar" />
-          <q-btn @click="clickSubmit" style=" width: 150px;" color="blue-8" label="Salvar" />
+          <q-btn @click="clickSubmit" style=" width: 150px;" color="blue-10" label="Salvar" />
         </q-card-actions>
   </q-page>
 </template>
